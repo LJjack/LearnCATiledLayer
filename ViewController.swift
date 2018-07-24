@@ -17,14 +17,14 @@ class ViewController: UIViewController, CALayerDelegate, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let rect = CGRect(x: 0, y: 0, width: 1280, height: 960)
-        
         let contentView = UIView(frame: rect)
+        //瓦片
         let tiledLayer = CATiledLayer()
         tiledLayer.frame = rect
         tiledLayer.delegate = self
         contentView.layer.addSublayer(tiledLayer)
         scrollView.addSubview(contentView)
-        //configure the scroll view 
+        
         scrollView.contentSize = contentView.frame.size
         
         //draw layer
@@ -35,13 +35,13 @@ class ViewController: UIViewController, CALayerDelegate, UIScrollViewDelegate {
     func draw(_ layer: CALayer, in ctx: CGContext) {
         let layer = layer as! CATiledLayer
         
-        //determine tile coordinate
+        //配置瓦片位置
         let bounds = ctx.boundingBoxOfClipPath
         let x = bounds.origin.x / layer.tileSize.width
         let y = bounds.origin.y / layer.tileSize.height
         
-        //load tile image
-        let imageName = "LiuYan_0\(Int(x))_0\(Int(y))"
+         //加载瓦片图片
+        let imageName = "LiuYan_0\(Int(x))_0\(Int(y))"//大图切成的小图
         let tileImage = UIImage(named: imageName)
         
         //draw tile
